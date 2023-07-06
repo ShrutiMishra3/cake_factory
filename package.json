@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "faker": "^6.6.6"
+  }
+}
