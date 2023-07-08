@@ -1,5 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { Input,InputLabel, FormControl } from '@mui/material';
+
+
 
 const CakeDetailsForm = () => {
   const [cake, setCake] = useState({
@@ -26,7 +29,7 @@ const CakeDetailsForm = () => {
     e.preventDefault();
     // Make POST request to the server to save the cake data
     axios
-      .post("/api/cakes", cake)
+      .post("http://localhost:5500/api/cake", cake)
       .then((response) => {
         console.log("Cake data saved successfully:", response.data);
         // Reset the form fields
@@ -51,114 +54,52 @@ const CakeDetailsForm = () => {
     <div>
       <h2>Cake Details</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={cake.name}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="name">Name:</InputLabel>
+        <Input type="text" id="name" name="name" value={cake.name} onChange={handleChange} required/>
         <br />
         <br />
 
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={cake.description}
-          onChange={handleChange}
-          required
-        ></textarea>
+        <InputLabel htmlFor="description">Description:</InputLabel>
+        <textarea id="description" name="description" value={cake.description} onChange={handleChange} required></textarea>
         <br />
         <br />
 
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          value={cake.price}
-          onChange={handleChange}
-          step="0.01"
-          required
-        />
+        <InputLabel htmlFor="price">Price:</InputLabel>
+        <Input type="number" id="price" name="price" value={cake.price} onChange={handleChange} step="0.01" required />
         <br />
         <br />
 
-        <label htmlFor="flavors">Flavors:</label>
-        <input
-          type="text"
-          id="flavors"
-          name="flavors"
-          value={cake.flavors}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="flavors">Flavors:</InputLabel>
+        <Input type="text" id="flavors" name="flavors" value={cake.flavors} onChange={handleChange} required />
         <br />
         <br />
 
-        <label htmlFor="sizes">Sizes:</label>
-        <input
-          type="text"
-          id="sizes"
-          name="sizes"
-          value={cake.sizes}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="sizes">Sizes:</InputLabel>
+        <Input type="text" id="sizes" name="sizes" value={cake.sizes} onChange={handleChange} required />
         <br />
         <br />
 
-        <label htmlFor="ingredients">Ingredients:</label>
-        <textarea
-          id="ingredients"
-          name="ingredients"
-          value={cake.ingredients}
-          onChange={handleChange}
-          required
-        ></textarea>
+        <InputLabel htmlFor="ingredients">Ingredients:</InputLabel>
+        <textarea id="ingredients" name="ingredients" value={cake.ingredients} onChange={handleChange} required></textarea>
         <br />
         <br />
 
-        <label htmlFor="image">Image URL:</label>
-        <input
-          type="text"
-          id="image"
-          name="image"
-          value={cake.image}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="image">Image URL:</InputLabel>
+        <Input type="text" id="image" name="image" value={cake.image} onChange={handleChange} required />
         <br />
         <br />
 
-        <label htmlFor="category">Category:</label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          value={cake.category}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="category">Category:</InputLabel>
+        <Input type="text" id="category" name="category" value={cake.category} onChange={handleChange} required />
         <br />
         <br />
 
-        <label htmlFor="stock">Stock:</label>
-        <input
-          type="number"
-          id="stock"
-          name="stock"
-          value={cake.stock}
-          onChange={handleChange}
-          required
-        />
+        <InputLabel htmlFor="stock">Stock:</InputLabel>
+        <Input type="number" id="stock" name="stock" value={cake.stock} onChange={handleChange} required />
         <br />
         <br />
 
-        <input type="submit" value="Submit" />
+        <Input type="submit" value="Submit" />
       </form>
     </div>
   );
