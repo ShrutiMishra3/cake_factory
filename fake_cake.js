@@ -12,16 +12,16 @@ const cake_size = ["Small", "Medium", "Large"];
 for (var i = 0; i <= 100; i++) {
   // Generate dummy data for the Cake model
   const dummyCake = {
-    name: faker.commerce.productName(),
+    name: faker.commerce.productName({ category : 'food' }),
     description: faker.lorem.sentence(),
     price: faker.commerce.price(),
     flavors: [faker.lorem.word()],
     sizes: cake_size.random(),
     ingredients: [faker.lorem.word(), faker.lorem.word(), faker.lorem.word()],
-    image: faker.image.url(),
+    image: faker.image.urlLoremFlickr({ category: 'food' }),
     category: faker.lorem.word(),
     ratings: [],
-    stock: Math.random()*100,
+    stock: faker.number.int({ max: 100 }),
   };
   dummy.push(dummyCake);
 }
