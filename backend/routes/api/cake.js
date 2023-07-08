@@ -24,8 +24,8 @@ router.get("/api/cake", async (req, res) => {
 router.post("/api/cake", async (req, res) => {
 
     Cake.find({ name: req.body.name }).then(async (data, error) => {
-        if (!data) {
-            console.log("Data: ", data, data.length);
+        if (data.length == 0) {
+            // console.log("Data: ", data, data.length);
 
             const cake = new Cake({
                 name: req.body.name,
@@ -43,26 +43,32 @@ router.post("/api/cake", async (req, res) => {
                 const savedCake = await cake.save();
                 // console.log("Cake created:", savedCake);
 
-                res.status(200).json(savedCake);
+                res.status(200).json({"Cake Created" : savedCake});
             } catch (error) {
                 console.error("Failed to create cake:", error);
             }
         } else {
-            console.log("Error: ", error);
+            console.log("Error: ", {msg : "Add Unique Name"});
             res.status(400).json({msg : "Add Unique Name"});
         }
     });
 });
 
+// Update cake
+// router.put("/api/cake/:id", async (res, req)=> {
+// 
+// })
+
+
 
 // Delete a cake
-router.delete("/api/cake"  , async (req, res) => {
-    Cake.deleteMany({ name: req.body.name }).then( async (result, err) => {
+router.delete("/api/cake/:name"  , async (req, res) => {
+    Cake.deleteMany(req.params.name).then( async (result, err) => {
         if (err) {
           console.error('Failed to delete documents:', err);
           res.status(400);
         } else {
-          console.log(`Deleted document(s) with name "${req.body.name}" from the collection.`);
+          console.log(`Deleted document(s) with name "${req.params.name}" from the collection.`);
           res.status(200).json({msg : "Delete Succesfully"});
         }
     })

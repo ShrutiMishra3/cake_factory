@@ -9,8 +9,8 @@ router.use((res, req, next) => {
 });
 
 
-router.get("/api/user", (req, res) => {
-    //  Find all users
+//  Find all users
+router.get("/api/user/", (req, res) => {
     User.find().then((users) => {
         console.log("All users:", users);
         res.status(200).json(users);
@@ -19,6 +19,20 @@ router.get("/api/user", (req, res) => {
     });
 });
 
+// Get user by his id
+router.get("/api/user/:id", (req, res) => {
+    User.findById(req.params.id).then( (data) => {
+        if(data){
+            res.status(200);
+            res.send(data);
+        }}).catch((error) => {
+            res.status(400);
+            console.log("Error Occured: ",error);
+            res.send("Error Occured: ",error);
+        })
+});
+
+// Save User data to database
 router.post("/api/user",async (req, res) => {
 
     User.findOne({email: req.body.email }).then( async (user) => {
