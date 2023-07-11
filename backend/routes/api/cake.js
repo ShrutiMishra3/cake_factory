@@ -20,6 +20,18 @@ router.get("/api/cake", async (req, res) => {
     }
 });
 
+// View cake by id
+router.get("/api/cake/:id", async (req, res) => {
+    try {
+        const cakes = await Cake.find({_id : req.params.id});
+        console.log("Orders: ", cakes);
+        res.status(200).json(cakes);
+    } catch (error) {
+        console.error("Failed to retrieve cakes:", error);
+        res.status(500).json({ msg: "Failed to retrieve cake" });
+    }
+});
+
 // Save cake in database
 router.post("/api/cake", async (req, res) => {
 

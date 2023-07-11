@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Card from "./components/Card";
+import FilterBar from "./components/FilterBar";
+
 // import UserDetailsForm from './components/UserDetailsForm'
 import CakeDetailsForm from "./components/CakeDetailsForm";
 import RegisterForm from "./components/Register";
@@ -30,9 +32,11 @@ function App() {
       <Navbar />
       <div className="container">
         {/* <Hero/> */}
+        <FilterBar/>
         <section className="cards">
           {cards}
         </section>
+        <hr />
         <Footer />
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function Footer(){
                     </ul>
                 </div>
             </div>
-            <p className="center">&copy; 2023 <span className="orange">Airbnb Inc.</span></p>
+            <p className="center">&copy; 2023 <span className="orange">cakeFactory Inc.</span></p>
         </>
     )
 }
