@@ -10,6 +10,8 @@ const User = require('../models/User');
 // app.use(cors());
 router.get('/users', (req,res,next) =>{
   console.log("GET REQ RECIEVED from Router");
+  res.send("GET REQ");
+  // next();
 })
 
 // API endpoint for handling user data
