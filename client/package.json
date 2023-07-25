@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -13,11 +13,19 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.4",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.13.7",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "husky": "^8.0.3",
+    "link": "^1.5.1",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "switch": "^0.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
@@ -27,7 +35,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "react-router-dom": "^6.14.1",
+    "react-router-dom": "^6.14.2",
     "vite": "^4.3.9"
   }
 }
