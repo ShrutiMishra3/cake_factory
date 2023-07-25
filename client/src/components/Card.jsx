@@ -31,17 +31,17 @@ export default function Card(cake) {
         <div className="card-body">
           <h5 className="card-title">{cake.name}</h5>
           <h5 className="card-title bold">₹ <s>{(parseFloat(cake.price) * randomNum).toFixed(2)}</s> {cake.price}</h5>
-          <p className="card-text card--title">{cake.description}</p>
+          <p className="card-text card--title description">{cake.description}</p>
           <p className="card-text"><small className="text-body-secondary">In-stock {cake.stock}</small></p>
         </div>
       </Link>
       <div className="container p-2">
         <a href="#" className="btn btn-primary m-2">Buy Now</a>
          {" "}
-        <a href="#" className="btn btn-warning m-2" onClick={addItemsToCart}>
+        <button className="btn btn-warning m-2" onClick={addItemsToCart}>
           Add to Cart <i className="fas fa-shopping-cart" /> 
           <sup color="red">{cartItems!=0 && cartItems}</sup>
-        </a>
+        </button>
       </div>
     </div>
     }

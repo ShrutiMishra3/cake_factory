@@ -24,9 +24,12 @@ function CakeDetails() {
         {cake &&
             <div className="p-2">
                 <img src={cake.image} alt={cake.name} className="img-fluid rounded mx-auto"/>
-                <h2 className="title">{cake.name}</h2>
-                <p>{cake.description}</p>
-                <p>Price: ${cake.price}</p>
+                <h2 className="title mt-3">{cake.name}</h2>
+                <p className="description">{cake.description}</p>
+                <p className="card-title mb-2">Price: <strong>₹ {cake.price}</strong></p>
+                <button className="btn btn-warning">
+                    Add to Cart <i className="fas fa-shopping-cart" /> 
+                </button>
             </div>
         }
         {!cake && <h2>Cake Not Found</h2>}

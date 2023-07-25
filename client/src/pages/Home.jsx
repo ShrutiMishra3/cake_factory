@@ -17,7 +17,7 @@ function Home() {
   return (
     <div>
       <h1>Welcome to the Cake Shop</h1>
-      <section className='container cards1'>
+      <section className='container cards1 products'>
         {cards}
       </section>
     </div>
