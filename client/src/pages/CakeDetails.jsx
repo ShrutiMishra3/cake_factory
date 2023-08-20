@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
+
+import { ShopContext } from "../context/shopContext";
 
 import data from "../../../cake.json";
 
@@ -13,8 +15,10 @@ function CakeDetails() {
     if(data[row].id == cakeId)
         cake = data[row];
   }
-  console.log("ID: ",cakeId);
-  console.log(cake);
+  // console.log("ID: ",cakeId);
+  // console.log(cake);
+
+  const { addToCart } = useContext(ShopContext);
 
   return (
     <>
@@ -27,7 +31,7 @@ function CakeDetails() {
                 <h2 className="title mt-3">{cake.name}</h2>
                 <p className="description">{cake.description}</p>
                 <p className="card-title mb-2">Price: <strong>₹ {cake.price}</strong></p>
-                <button className="btn btn-warning">
+                <button className="btn btn-warning" onClick={() => addToCart(cake.id)}>
                     Add to Cart <i className="fas fa-shopping-cart" /> 
                 </button>
             </div>

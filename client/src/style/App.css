@@ -102,6 +102,11 @@ hr{
   cursor: pointer;
 }
 
+.btn-card{
+  background-color: red  !important;
+  font-size: 200px;
+}
+
 .card:hover .card--image{
     opacity: 0.8;
 }
