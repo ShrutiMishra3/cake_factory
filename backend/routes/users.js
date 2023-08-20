@@ -5,14 +5,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const User = require('../models/User');
 
-// // Middleware
-// app.use(bodyParser.json());
-// app.use(cors());
-router.get('/users', (req,res,next) =>{
-  console.log("GET REQ RECIEVED from Router");
-  res.send("GET REQ");
-  // next();
-})
+
+router.use((req, res, next) => {
+  next();
+});
+
+router.get("/users", (req, res, next) => {
+  res.send("GET REQ on Router");
+  next();
+});
 
 // API endpoint for handling user data
 router.post('/users', (req, res, next) => {
