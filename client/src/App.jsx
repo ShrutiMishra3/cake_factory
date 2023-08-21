@@ -13,6 +13,8 @@ import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
 import NotFound from './pages/NotFound';
 
+import Login from "./pages/login/Login";
+
 import Navbar from "./components/Navbar";
 // import Hero from "./components/Hero";
 import Footer from "./components/Footer";

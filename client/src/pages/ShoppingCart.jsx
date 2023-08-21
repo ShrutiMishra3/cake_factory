@@ -25,7 +25,7 @@
 // export default ShoppingCart;
 
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/shopContext";
 // import { PRODUCTS } from "../../products";
 import data from "../../../cake.json";
@@ -33,7 +33,28 @@ import { CartItem } from "./cartItem";
 import { useNavigate } from "react-router-dom";
 import "../style/cart.css"
 
+
 function ShoppingCart(){
+  
+  // let response = fetch("127.0.0.1:5500/api/cake");
+  const [cakes, setCakes] = useState([])
+
+  const fetchCakeData = () => {
+    fetch("http://127.0.0.1:5500/api/cake")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setCakes(data)
+      })
+  }
+
+  useEffect(() => {
+    fetchCakeData()
+  }, [])
+  console.log(cakes);
+
+  
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
 
@@ -44,10 +65,10 @@ function ShoppingCart(){
       <div>
         <h1>Your Cart Items</h1>
       </div>
-      <div className="cart">
+      <div className="items">
         {data.map((product) => {
           if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} key={product.id} />;
+            return <CartItem data={product} key={product.id}/>;
           }
         })}
       </div>

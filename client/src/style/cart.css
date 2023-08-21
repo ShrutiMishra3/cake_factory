@@ -4,6 +4,21 @@
     justify-content: center;
     align-items:center;
   }
+
+  .cart-item{
+    display:  flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 20px;
+    border: 2px solid red;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .cart-item img{
+    max-width: 300px;
+    height: auto;
+  }
   
   .cartItem {
     width: 700px;
@@ -23,10 +38,11 @@
   .cartItem .description {
     width: 100%;
     font-size: 20px;
+    text-overflow: ellipsis;
   }
   
-  .countHandler input {
-    width: 40px;
+  .countHandler8 input {
+    width: 20px;
     text-align: center;
     font-weight: bolder;
   }
