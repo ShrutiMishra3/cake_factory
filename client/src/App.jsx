@@ -13,7 +13,8 @@ import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
 import NotFound from './pages/NotFound';
 
-import Login from "./pages/login/Login";
+import Login from "./pages/login/login";
+import Register from "./pages/login/Register";
 
 import Navbar from "./components/Navbar";
 // import Hero from "./components/Hero";
@@ -57,6 +58,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={ <Home/> } />
+        <Route exact path="/login" element={ <Login/> } />
+        <Route exact path="/register" element={ <Register/> } />
         <Route exact path="/cake/:cakeId" element={ <CakeDetails key={cake.id} {...cake}/> } />
         <Route exact path="/cart" element={ <ShoppingCart/> } />
         <Route exact path="/checkout" element={ <Checkout/> } />

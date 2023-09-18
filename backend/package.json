@@ -1,11 +1,14 @@
 {
   "name": "backend",
   "version": "0.0.0",
+  "proxy": "http://localhost:5500",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "~1.4.4",
@@ -17,6 +20,7 @@
     "faker": "^6.6.6",
     "http-errors": "~1.6.3",
     "jade": "^0.31.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.4",
     "morgan": "~1.9.1"

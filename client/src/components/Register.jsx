@@ -18,6 +18,7 @@ const RegisterForm = () => {
  
     return (
         <React.Fragment>
+            <div className="container">
             <h2>Register Form</h2>
             <form onSubmit={handleSubmit} action={<Link to="/login" />}>
                 <Stack spacing={2} direction="row" sx={{marginBottom: 4}}>
@@ -78,7 +79,7 @@ const RegisterForm = () => {
                 <Button variant="outlined" color="secondary" type="submit">Register</Button>
             </form>
             <small>Already have an account? <Link to="/login">Login Here</Link></small>
-     
+            </div>
         </React.Fragment>
     )
 }

@@ -17,7 +17,7 @@ var user = require("./routes/api/user")
 var cake = require("./routes/api/cake")
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5500
 
 // Middlewares
 
@@ -32,5 +32,4 @@ app.use(bodyParser.json());   // parse application/json
 app.use(index)
 app.use(user)
 app.use(cake)
- 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));

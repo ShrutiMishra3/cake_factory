@@ -19,13 +19,15 @@
     "@mui/material": "^5.13.7",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "formik": "^2.4.4",
     "husky": "^8.0.3",
     "link": "^1.5.1",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "switch": "^0.0.0"
+    "switch": "^0.0.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
