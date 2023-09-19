@@ -12,7 +12,7 @@ router.use((res, req, next) => {
 router.get("/api/cake", async (req, res) => {
     try {
         const cakes = await Cake.find();
-        console.log("Orders: ", cakes);
+        // console.log("Orders: ", cakes);
         res.status(200).json(cakes);
     } catch (error) {
         console.error("Failed to retrieve orders:", error);
@@ -24,7 +24,7 @@ router.get("/api/cake", async (req, res) => {
 router.get("/api/cake/:id", async (req, res) => {
     try {
         const cakes = await Cake.find({_id : req.params.id});
-        console.log("Orders: ", cakes);
+        // console.log("Orders: ", cakes);
         res.status(200).json(cakes);
     } catch (error) {
         console.error("Failed to retrieve cakes:", error);
