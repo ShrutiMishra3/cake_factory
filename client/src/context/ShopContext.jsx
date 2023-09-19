@@ -1,64 +1,45 @@
-import React, { createContext, useState, useEffect } from "react";
-
+import React, { createContext, useState } from "react";
 import data from "../../../cake.json";
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 0; i < data.length; i++) {
-    cart[data[i].id] = 0;
-  }
-  return cart;
+  return Object.fromEntries(data.map((item) => [item.id, 0]));
 };
 
 export const ShopContextProvider = (props) => {
-    const [cartItems, setCartItems] = useState(getDefaultCart());
-  
-    const getTotalCartAmount = () => {
-      let totalAmount = 0;
-      for (const item in cartItems) {
-        if (cartItems[item] > 0) {
-          let itemInfo = data.find((product) => product.id === Number(item));
-          totalAmount += cartItems[item] * itemInfo.price;
-        }
+  const [cartItems, setCartItems] = useState(getDefaultCart());
+
+  const getTotalCartAmount = () => {
+    return Object.keys(cartItems).reduce((totalAmount, itemId) => {
+      if (cartItems[itemId] > 0) {
+        const itemInfo = data.find((product) => product.id === Number(itemId));
+        return totalAmount + cartItems[itemId] * itemInfo.price;
       }
       return totalAmount;
-    };
-  
-    const addToCart = (itemId) => {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    };
-  
-    const removeFromCart = (itemId) => {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    };
-  
-    const updateCartItemCount = (newAmount, itemId) => {
-      setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-    };
-  
-    const checkout = () => {
-      setCartItems(getDefaultCart());
-    };
-
-    for(const key in cartItems){
-        if(cartItems[key] > 0)
-            console.log(key, cartItems[key])
-    }
-  
-    const contextValue = {
-      cartItems,
-      addToCart,
-      updateCartItemCount,
-      removeFromCart,
-      getTotalCartAmount,
-      checkout,
-    };
-  
-    return (
-      <ShopContext.Provider value={contextValue}>
-        {props.children}
-      </ShopContext.Provider>
-    );
+    }, 0);
   };
+
+  const updateCartItemCount = (newAmount, itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+  };
+
+  const checkout = () => {
+    setCartItems(getDefaultCart());
+  };
+
+  Object.keys(cartItems).forEach((key) => {
+    if (cartItems[key] > 0) console.log(key, cartItems[key]);
+  });
+
+  const contextValue = {
+    cartItems,
+    addToCart: (itemId) => updateCartItemCount(cartItems[itemId] + 1, itemId),
+    removeFromCart: (itemId) => updateCartItemCount(cartItems[itemId] - 1, itemId),
+    updateCartItemCount,
+    getTotalCartAmount,
+    checkout,
+  };
+
+  return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
+};

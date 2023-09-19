@@ -1,7 +1,7 @@
 // import logo from "/images/logo-no-background.png"
 import logo from "/images/cakeFactory.jpg";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../context/shopContext";
+import { ShopContext } from "../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 
 export default function Navbar() {

@@ -26,7 +26,7 @@
 
 
 import React, { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/shopContext";
+import { ShopContext } from "../context/ShopContext";
 // import { PRODUCTS } from "../../products";
 import data from "../../../cake.json";
 import { CartItem } from "./cartItem";
