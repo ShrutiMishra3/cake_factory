@@ -1,64 +1,64 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
-import "../style/cart.css"
 
-export const CartItem = (props) => {
-    const { id, name, price, image, description } = props.data;
-    const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
-        useContext(ShopContext);
+export const CartItem = ( props ) => {
+  const { id, name, price, image, description } = props.data;
+  const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
+    useContext(ShopContext);
 
-    return (
-        <>
-            <div className="cart-item">
-                <div>
-                    <img src={image} alt="Card image" />
-                </div>
-                <div>
-                    <h5>{name}</h5>
-                    <p className="description">{description}</p>
-                    {/* <a href="#" ="btn btn-primary">Button</a> */}
-                    <div className="row g-3 countHandler">
-                        <div className="col-sm-2">
-                            <button className="btn btn-danger input-group-text"
-                                onClick={() => removeFromCart(id)}> - </button>
-                            <input
-                                type="text" className="form-control"
-                                value={cartItems[id]}
-                                onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
-                            />
-                            <button className="btn btn-danger input-group-text"
-                                onClick={() => addToCart(id)}> + </button>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Price: ₹{price}</p>
-                    </div>
-                </div>
+  const handleRemoveFromCart = () => {
+    removeFromCart(id);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(id);
+  };
+
+  const handleItemCountChange = (e) => {
+    const newCount = Number(e.target.value);
+    updateCartItemCount(newCount, id);
+  };
+
+  return (
+    <div className="card mb-3">
+      <div className="row g-0">
+        <div className="col-md-4">
+          <img src={image} alt="Card image" className="img-fluid" />
+        </div>
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">{description}</p>
+            <div className="row g-3 align-items-center">
+              <div className="col-auto">
+                <button
+                  className="btn btn-danger"
+                  onClick={handleRemoveFromCart}
+                >
+                  -
+                </button>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="number"
+                  className="form-control"
+                  value={cartItems[id]}
+                  onChange={handleItemCountChange}
+                />
+              </div>
+              <div className="col-auto">
+                <button
+                  className="btn btn-success"
+                  onClick={handleAddToCart}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            {/* <hr className="hr"/> */}
-            {/* <div className="cartItem">
-                <div>
-
-                    <img src={image} />
-                    <div className="description">
-                        <p>
-                            <b>{name}</b>
-                        </p>
-                        <p>{description}</p>
-                        <p> Price: ₹{price}</p>
-                        <div className="countHandler">
-                            <button
-                                onClick={() => removeFromCart(id)}> - </button>
-                            <input
-                                value={cartItems[id]}
-                                onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
-                            />
-                            <button
-                                onClick={() => addToCart(id)}> + </button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-        </>
-    );
+            <p className="card-text mt-3">Price: ₹{price}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };

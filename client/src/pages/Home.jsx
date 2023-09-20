@@ -1,42 +1,36 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import "../style/App.css"
+import '../style/App.css';
 
-import Card from "../components/Card";
-// import data from "../../../cake.json"
-
+import Card from '../components/Card';
 
 function Home() {
-  // Getting data from backend server
-  const [cakes, setCakes] = useState([])
-
-  const fetchCakeData = () => {
-    fetch("http://localhost:5500/api/cake")
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        setCakes(data)
-      })
-  }
+  const [cakes, setCakes] = useState([]);
 
   useEffect(() => {
-    fetchCakeData()
-  }, [])
-  console.log(cakes);
+    fetchCakeData();
+  }, []);
 
-  // Your home page content
-  const cards = cakes.map(item => {
-    return (
-      <Card key={item.id} {...item} />
-    )
-  })
+  const fetchCakeData = () => {
+    fetch('http://localhost:5500/api/cake')
+      .then((response) => response.json())
+      .then((data) => {
+        setCakes(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching cake data:', error);
+      });
+  };
+
+  const cards = cakes.map((item) => (
+    <Card key={item.id} {...item} />
+  ));
 
   return (
     <div>
-      <h1 className='title d-flex justify-content-center'>Welcome to the Cake Factory</h1>
-      <section className='container cards1 products'>
+      <h1 className="title d-flex justify-content-center">Welcome to the Cake Factory</h1>
+      <section className="container cards1 products">
         {cards}
       </section>
     </div>
