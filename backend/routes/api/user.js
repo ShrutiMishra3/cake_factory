@@ -40,6 +40,12 @@ router.get("/api/user/:id", (req, res) => {
 
 router.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
+
+    if(!email || !password){
+        return res.send("Both fields are required").status(400)
+    }
+
+    console.log("REQ: ", email, password);
   
     try {
       // Check if the user with the provided email exists
