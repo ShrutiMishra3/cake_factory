@@ -83,13 +83,13 @@ function ShoppingCart(){
           <br />
           <div className="col-md-6 d-flex justify-content-end">
             <button
-              className="btn btn-dark me-2"
+              className="btn btn-warning me-2"
               onClick={() => navigate("/")}
             >
               Continue Shopping
             </button>
             <button
-              className="btn btn-warning"
+              className="btn btn-outline-warning"
               onClick={() => {
                 checkout();
                 navigate("/checkout");

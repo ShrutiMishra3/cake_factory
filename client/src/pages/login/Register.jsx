@@ -40,6 +40,8 @@ const Register = () => {
     })
       .then((response) => {
         if (!response.ok) {
+          console.log(response);
+          alert(response.status);
           throw new Error('Network response was not ok');
         }
         return response.json();
