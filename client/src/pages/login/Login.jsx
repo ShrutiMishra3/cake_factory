@@ -19,7 +19,7 @@ const Login = () => {
   const onSubmit = async (values) => {
     try {
       // Send a POST request to your login endpoint
-      const response = await fetch('http://localhost:5500/api/login', {
+      const response = await fetch('http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com:5500/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

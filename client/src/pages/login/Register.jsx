@@ -34,7 +34,7 @@ const Register = () => {
 
   const onSubmit = (values) => {
     // Send a POST request to your server
-    fetch('http://localhost:5500/api/register', {
+    fetch('http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com:5500/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -130,6 +130,7 @@ const Register = () => {
           </div>
         </Form>
       </Formik>
+      <small>Already have an account? <Link to="/login">Login Here</Link></small>
     </div>
   );
 };

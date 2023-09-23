@@ -1,30 +1,3 @@
-// import data from "../../../cake.json";
-
-// function ShoppingCart() {
-//   // Fetch shopping cart items from API or state
-//   // For example:
-//   const cartItems = [
-//     { id: 1, name: 'Unbranded Cotton Bacon', price: 249.0, quantity: 2 },
-//     { id: 2, name: 'Delicious Chocolate Cake', price: 25.99, quantity: 1 },
-//   ];
-
-//   return (
-//     <div>
-//       <h2>Shopping Cart</h2>
-//       {cartItems.map((item) => (
-//         <div key={item.id}>
-//           <p>{item.name}</p>
-//           <p>Price: ${item.price}</p>
-//           <p>Quantity: {item.quantity}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default ShoppingCart;
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 // import { PRODUCTS } from "../../products";
@@ -40,7 +13,7 @@ function ShoppingCart(){
   const [cakes, setCakes] = useState([])
 
   const fetchCakeData = () => {
-    fetch("http://127.0.0.1:5500/api/cake")
+    fetch("http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com:5500/api/cake")
       .then(response => {
         return response.json()
       })

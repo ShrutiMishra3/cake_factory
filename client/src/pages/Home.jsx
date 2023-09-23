@@ -13,7 +13,7 @@ function Home() {
   }, []);
 
   const fetchCakeData = () => {
-    fetch('http://localhost:5500/api/cake')
+    fetch('http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com:5500/api/cake')
       .then((response) => response.json())
       .then((data) => {
         setCakes(data);
