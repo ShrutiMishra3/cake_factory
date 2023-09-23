@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import logo from "/images/cakeFactory.jpg";
 
 const Navbar = () => {
   const { cartItems } = useContext(ShopContext);
   const [totalCartItems, setTotalCartItems] = useState(cartItems[0]);
+
+  const navigate = useNavigate(); // Initialize the navigate function
 
   useEffect(() => {
     const totalCount = Object.values(cartItems).reduce(
@@ -18,7 +20,11 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-warning border-bottom border-bottom-dark navbar-expand-lg" data-bs-theme="light">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
+      <Link
+          to="/"
+          className="navbar-brand"
+          onClick={() => navigate("/")} // Use navigate to go to page 1 ("/")
+        >
           <img src={logo} className="logo-img" alt="Logo" />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +33,10 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
             <li className="nav-item">
-              <Link to="/" className="nav-link active" aria-current="page">
+              <Link 
+              to="/"
+              onClick={() => navigate("/")}
+              className="nav-link active" aria-current="page">
                 Home
               </Link>
             </li>

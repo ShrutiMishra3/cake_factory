@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import.meta.env.VITE_APP_ORIGIN
 
@@ -9,10 +9,12 @@ function CakeDetails() {
   const [cake, setCake] = useState(null);
   const [buttonClicked, setButtonClicked] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(import.meta.env.VITE_APP_ORIGIN);
+        const response = await fetch(import.meta.env.VITE_APP_ORIGIN + "/api/cake");
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -36,8 +38,16 @@ function CakeDetails() {
     addToCart(cake.id);
   };
 
+  // Function to handle the back button click
+  const handleBackClick = () => {
+    navigate(-1); // Use navigate(-1) to navigate back to the previous page
+  };
+
   return (
     <div className="container mt-5">
+       <button  className="btn btn-outline-dark m-2" onClick={handleBackClick}> 
+       <i className="fa-solid fa-arrow-left"></i> Back
+       </button>
       {cake ? (
         <div className="row">
           <div className="col-md-6">
@@ -46,6 +56,8 @@ function CakeDetails() {
           <div className="col-md-6">
             <h2 className="display-4 mt-3">{cake.name}</h2>
             <p className="lead">{cake.description}</p>
+            <p>Category: [{cake.category}]</p>
+            <p>Size: {cake.sizes}</p>
             <p className="card-text mb-2">
               Price: <strong>₹ {cake.price}</strong>
             </p>
@@ -59,6 +71,7 @@ function CakeDetails() {
                 <sup className="--bs-danger-text-emphasis">{cartItems[cake.id]}</sup>
               )}
             </button>
+            
           </div>
         </div>
       ) : (

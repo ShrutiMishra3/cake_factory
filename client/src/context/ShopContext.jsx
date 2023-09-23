@@ -10,7 +10,7 @@ export const ShopContextProvider = (props) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(import.meta.env.VITE_APP_ORIGIN);
+        const response = await fetch(import.meta.env.VITE_APP_ORIGIN + "/api/cake");
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -20,10 +20,6 @@ export const ShopContextProvider = (props) => {
         // Calculate the initial cart items based on fetched data
         const defaultCart = Object.fromEntries(jsonData.map((item) => [item.id, 0]));
         setCartItems(defaultCart);
-
-        // Logging the fetched data
-        console.log("DefaultCart:  ",defaultCart);
-        console.log("DATA: ",jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
