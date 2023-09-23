@@ -17,6 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(""); // State to store login error message
 
+
   const onSubmit = async (values) => {
     try {
       // Send a POST request to your login endpoint
@@ -51,8 +52,16 @@ const Login = () => {
     }
   };
 
+  // Function to handle the back button click
+  const handleBackClick = () => {
+    navigate(-1); // Use navigate(-1) to navigate back to the previous page
+  };
+
   return (
     <div className="container">
+      <button  className="btn btn-sm btn-outline-dark m-2" onClick={handleBackClick}>
+      <i className="fa-solid fa-reply"></i> Back
+      </button>
       <h1 className="my-4">Login</h1>
       <Formik
         initialValues={initialValues}

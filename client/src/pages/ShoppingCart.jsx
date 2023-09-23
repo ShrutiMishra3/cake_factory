@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { CartItem } from "./cartItem";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../style/cart.css";
 
 function ShoppingCart() {
@@ -16,7 +16,9 @@ function ShoppingCart() {
   useEffect(() => {
     async function fetchCakeData() {
       try {
-        const response = await fetch(import.meta.env.VITE_APP_ORIGIN + "/api/cake");
+        const response = await fetch(
+          import.meta.env.VITE_APP_ORIGIN + "/api/cake"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -37,11 +39,13 @@ function ShoppingCart() {
 
   return (
     <>
-
       <div className="container mt-5">
-      <button className="btn btn-outline-dark m-2" onClick={handleBackClick}>
-        <i className="fa-solid fa-arrow-left"></i> Back
-      </button>
+        <button
+          className="btn btn-sm btn-outline-dark m-2"
+          onClick={handleBackClick}
+        >
+          <i className="fa-solid fa-reply"></i> Back
+        </button>
         <div className="row">
           <div className="col">
             <h1>Your Cart Items</h1>
@@ -69,15 +73,9 @@ function ShoppingCart() {
               >
                 Continue Shopping
               </button>
-              <button
-                className="btn btn-outline-warning"
-                onClick={() => {
-                  checkout();
-                  navigate("/checkout");
-                }}
-              >
+              <Link to="/checkout" className="btn btn-outline-warning">
                 <i className="fa-solid fa-file-invoice"></i> Checkout
-              </button>
+              </Link>
             </div>
           </div>
         ) : (

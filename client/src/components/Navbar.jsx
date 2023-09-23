@@ -47,12 +47,12 @@ const Navbar = () => {
               <ul className="dropdown-menu">
                 <li>
                   <Link to="/login" className="nav-link active" aria-current="page">
-                    Login
+                  <i className="fa-solid fa-cookie-bite"></i>  Login
                   </Link>
                 </li>
                 <li>
                   <Link to="/register" className="nav-link active" aria-current="page">
-                    Register
+                  <i className="fa-solid fa-ice-cream"></i>  Register
                   </Link>
                 </li>
                 <li>
@@ -60,7 +60,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Something else here
+                  Something else <i className="fa-solid fa-comments"></i>
                   </a>
                 </li>
               </ul>

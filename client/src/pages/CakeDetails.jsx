@@ -45,8 +45,8 @@ function CakeDetails() {
 
   return (
     <div className="container mt-5">
-       <button  className="btn btn-outline-dark m-2" onClick={handleBackClick}> 
-       <i className="fa-solid fa-arrow-left"></i> Back
+       <button  className="btn btn-sm btn-outline-dark m-2" onClick={handleBackClick}> 
+       <i className="fa-solid fa-reply"></i> Back
        </button>
       {cake ? (
         <div className="row">

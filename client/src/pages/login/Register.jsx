@@ -71,8 +71,8 @@ const Register = () => {
 
   return (
     <div className="container">
-      <button className="btn btn-outline-dark m-2" onClick={handleBackClick}>
-        <i className="fa-solid fa-arrow-left"></i> Back
+      <button  className="btn btn-sm btn-outline-dark m-2" onClick={handleBackClick}>
+      <i className="fa-solid fa-reply"></i> Back
       </button>
       <h1 className="my-4">Registration</h1>
       <Formik
