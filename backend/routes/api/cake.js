@@ -81,15 +81,6 @@ router.delete("/api/cake"  , async (req, res) => {
     }catch (error){
         console.error("Failed to delete cakes: ", error);
     }
-    // Cake.deleteMany(req.params.name).then( async (result, err) => {
-    //     if (err) {
-    //       console.error('Failed to delete documents:', err);
-    //       res.status(400);
-    //     } else {
-    //       console.log(`Deleted document(s) with name "${req.params.name}" from the collection.`);
-    //       res.status(200).json({msg : "Delete Succesfully"});
-    //     }
-    // })
 })
 
 
