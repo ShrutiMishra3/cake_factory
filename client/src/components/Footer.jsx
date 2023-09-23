@@ -40,6 +40,10 @@ const pageLinks = [
     href: "/cart",
   },
   {
+    title: "Checkout",
+    href: "/checkout",
+  },
+  {
     title: "Login",
     href: "/login",
   },
