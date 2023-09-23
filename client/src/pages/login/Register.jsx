@@ -1,33 +1,36 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const Register = () => {
-  const initialValues = {
-    name: '',
-    email: '',
-    password: '',
-    address: {
-      street: '',
-      city: '',
-      state: '',
-      country: '',
-      postalCode: '',
-    },
-  };
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+  address: {
+    street: '',
+    city: '',
+    state: '',
+    country: '',
+    postalCode: '',
+  },
+};
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-    address: Yup.object().shape({
-      street: Yup.string().required('Street is required'),
-      city: Yup.string().required('City is required'),
-      state: Yup.string().required('State is required'),
-      country: Yup.string().required('Country is required'),
-      postalCode: Yup.string().required('Postal code is required'),
-    }),
-  });
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string().required('Password is required'),
+  address: Yup.object().shape({
+    street: Yup.string().required('Street is required'),
+    city: Yup.string().required('City is required'),
+    state: Yup.string().required('State is required'),
+    country: Yup.string().required('Country is required'),
+    postalCode: Yup.string().required('Postal code is required'),
+  }),
+});
+
+const Register = () => {
+  const navigate = useNavigate(); // Initialize navigate function
 
   const onSubmit = (values) => {
     // Send a POST request to your server
@@ -47,8 +50,13 @@ const Register = () => {
         return response.json();
       })
       .then((data) => {
+        alert(data.message);
         console.log('Registration successful', data);
-        // You can perform actions after successful registration, such as redirecting the user
+        if(data.message != "User already exists"){
+          navigate('/login');
+        }
+        // Navigate to the /register route
+        navigate('/register'); 
       })
       .catch((error) => {
         console.error('Error during registration:', error);
@@ -117,6 +125,7 @@ const Register = () => {
           </div>
 
           <div className="mb-3">
+            {/* Use Link component to navigate to /login */}
             <button type="submit" className="btn btn-primary">Register</button>
           </div>
         </Form>
@@ -126,3 +135,4 @@ const Register = () => {
 };
 
 export default Register;
+       

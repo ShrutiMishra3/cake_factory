@@ -8,11 +8,12 @@ const initialValues = {
   password: '',
 };
 
-
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string().required('Password is required'),
 });
+
+var dataBadge;
 
 const Login = () => {
   const onSubmit = async (values) => {
@@ -27,15 +28,24 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        console.log("RES: ",response);
+        console.log("RES: ", response);
         throw new Error('Network response was not ok');
       }
 
       const data = await response.json();
-      alert('Login Successful');
-      console.log('Login successful', data);
+      dataBadge = data.message;
+      if (!data.success) {
+    //     // Display a red badge if data.message is "Incorrect password or email"
+    //     const messageBadge = data.message === "Incorrect password or email" ? (
+    //       <span className="badge bg-danger">Error</span>
+    //     ) : null;
 
-      // You can handle the login success here, such as storing authentication tokens
+        alert(data.message); // Display the message
+        console.log('Login unsuccessful', data);
+        console.log('Login successful', data);
+
+        // You can handle the login success here, such as storing authentication tokens
+      }
     } catch (error) {
       console.error('Error during login:', error);
       // Handle login error, e.g., display an error message to the user
@@ -105,6 +115,13 @@ const Login = () => {
               Register
             </Link>
           </div>
+
+          {/* Render the badge conditionally */}
+          {dataBadge === "Incorrect password or email" && (
+            <div className="mb-3">
+              <span className="badge bg-danger">Error</span>
+            </div>
+          )}
         </Form>
       </Formik>
     </div>
