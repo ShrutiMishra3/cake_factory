@@ -2,9 +2,12 @@ const express = require("express");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10; // Number of salt rounds for bcrypt hashing
-const secretKey = 'big-secret-key'; // Replace with a secure secret key
+const secretKey = process.env.SECRET_KEY || 'big-secret-key'; // Replace with a secure secret key
 
-const User = require("../../models/User")
+const User = require("../../models/User");
+const { Signup, Login } = require("../auth/authController");
+const { route } = require("./cake");
+const { userVerification } = require("../auth/authRoute");
 
 // const loginReq = require("../auth/isLoggedIn")
 
@@ -13,6 +16,10 @@ const router = express.Router();
 router.use((res, req, next) => {
     next();
 });
+
+// Authorization middleware
+router.post("/api/", userVerification)
+
 
 
 //  Find all users
@@ -38,6 +45,10 @@ router.get("/api/user/:id", (req, res) => {
         })
 });
 
+router.post("/api/login", Login)
+router.post("/api/register", Signup)
+
+/*
 router.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -74,7 +85,11 @@ router.post("/api/login", async (req, res) => {
     }
   });
 
+  */
+
 // Save User data to database
+
+/* 
 router.post("/api/register", async (req, res) => {
   const { name, email, password, address } = req.body;
 
@@ -107,6 +122,7 @@ router.post("/api/register", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+*/
 
 
 /* 
