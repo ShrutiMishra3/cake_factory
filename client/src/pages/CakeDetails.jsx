@@ -1,17 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
-import data from "../../../cake.json";
+import.meta.env.VITE_APP_ORIGIN
 
 function CakeDetails() {
   const { cakeId } = useParams();
   const { cartItems, addToCart } = useContext(ShopContext);
-
-  // Find the cake in the data array based on cakeId
-  const cake = data.find((item) => item.id == cakeId);
-
-  // State to track whether the button has been clicked
+  const [cake, setCake] = useState(null);
   const [buttonClicked, setButtonClicked] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(import.meta.env.VITE_APP_ORIGIN);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+        const foundCake = jsonData.find((item) => item.id == cakeId);
+        setCake(foundCake);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, [cakeId]);
 
   // Function to handle the "Add to Cart" button click
   const handleAddToCartClick = () => {

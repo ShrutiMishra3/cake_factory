@@ -1,14 +1,38 @@
-import React, { createContext, useState } from "react";
-import data from "../../../cake.json";
+import React, { createContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
-  return Object.fromEntries(data.map((item) => [item.id, 0]));
-};
-
 export const ShopContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [cartItems, setCartItems] = useState({});
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(import.meta.env.VITE_APP_ORIGIN);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+
+        // Calculate the initial cart items based on fetched data
+        const defaultCart = Object.fromEntries(jsonData.map((item) => [item.id, 0]));
+        setCartItems(defaultCart);
+
+        // Logging the fetched data
+        console.log("DefaultCart:  ",defaultCart);
+        console.log("DATA: ",jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const getTotalCartAmount = () => {
     return Object.keys(cartItems).reduce((totalAmount, itemId) => {
@@ -25,7 +49,9 @@ export const ShopContextProvider = (props) => {
   };
 
   const checkout = () => {
-    setCartItems(getDefaultCart());
+    // Reset cart to its initial state
+    const defaultCart = Object.fromEntries(data.map((item) => [item.id, 0]));
+    setCartItems(defaultCart);
   };
 
   Object.keys(cartItems).forEach((key) => {
@@ -39,7 +65,12 @@ export const ShopContextProvider = (props) => {
     updateCartItemCount,
     getTotalCartAmount,
     checkout,
+    isLoading, // You can use this isLoading flag for conditional rendering
   };
 
-  return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
+  return (
+    <ShopContext.Provider value={contextValue}>
+      {isLoading ? <div>Loading...</div> : props.children}
+    </ShopContext.Provider>
+  );
 };

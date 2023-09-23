@@ -1,37 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-// import { PRODUCTS } from "../../products";
-import data from "../../../cake.json";
 import { CartItem } from "./cartItem";
 import { useNavigate } from "react-router-dom";
-import "../style/cart.css"
+import "../style/cart.css";
 
-
-function ShoppingCart(){
-  
-  // let response = fetch("127.0.0.1:5500/api/cake");
-  const [cakes, setCakes] = useState([])
-
-  const fetchCakeData = () => {
-    fetch("http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com:5500/api/cake")
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        setCakes(data)
-      })
-  }
-
-  useEffect(() => {
-    fetchCakeData()
-  }, [])
-  console.log(cakes);
-
-  
+function ShoppingCart() {
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
 
   const navigate = useNavigate();
+
+  // Fetch cake data and store it in the "cakes" state
+  const [cakes, setCakes] = useState([]);
+
+  useEffect(() => {
+    async function fetchCakeData() {
+      try {
+        const response = await fetch(import.meta.env.VITE_APP_ORIGIN);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setCakes(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchCakeData();
+  }, []);
 
   return (
     <div className="cart container mt-5">
@@ -41,10 +38,11 @@ function ShoppingCart(){
         </div>
       </div>
       <div className="row items">
-        {data.map((product) => {
+        {cakes.map((product) => {
           if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} key={product.id}/>;
+            return <CartItem data={product} key={product.id} />;
           }
+          return null; // You should add this to avoid potential rendering issues.
         })}
       </div>
 
