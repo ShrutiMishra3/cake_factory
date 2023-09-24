@@ -3,6 +3,7 @@
 - [Live Link](http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com/)
 
 -  [SRS Document](https://docs.google.com/document/d/1xxq_HDyZgQQXE9Ql2p_ONqY0hUvuF4eadkP6IVx8N5k/edit?usp=sharing)
+- [Screenshots](#screenshots)
 
 ## Steps to Execute
 
