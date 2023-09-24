@@ -31,8 +31,6 @@
 
 #### Things to do
 
-```
-    * Set development and prodcution url [x]
-    * Implement Authentication []
-    * Implement checkout [x]
-```
+[x] Set development and prodcution url
+[] Implement Authentication
+[x] Implement checkout
