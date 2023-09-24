@@ -30,7 +30,7 @@ ORIGIN="http:localhost:5500/"
 ```
 
 ```bash
-touch config/config.js
+touch backend/config/config.js
 #Content of config.js
 PORT = 5500
 MONGO_URI = 'YOUR_MONGO_DB_CONNECTION_URI'
