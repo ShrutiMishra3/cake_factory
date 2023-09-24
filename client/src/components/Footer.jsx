@@ -30,11 +30,47 @@ const socials = [
   },
 ];
 
+const pageLinks = [
+  {
+    title: "Home",
+    href: "Home",
+  },
+  {
+    title: "Cart",
+    href: "/cart",
+  },
+  {
+    title: "Checkout",
+    href: "/checkout",
+  },
+  {
+    title: "Login",
+    href: "/login",
+  },
+  {
+    title: "Register",
+    href: "/register",
+  },
+];
+
 const Footer = () => (
   <footer className="py-5 footer">
     <div className="container">
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-4">
+          <h1>Sitemap</h1>
+          <ul className="list-unstyled">
+            {pageLinks.map((page) => (
+              <li key={page.title}>
+                <a href={page.href} className="text-decoration-none">
+                  {page.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="col-md-4">
           <h1>Links</h1>
           <ul className="list-unstyled">
             {links.map((link) => (
@@ -46,7 +82,8 @@ const Footer = () => (
             ))}
           </ul>
         </div>
-        <div className="col-md-6">
+
+        <div className="col-md-4">
           <h1>Socials</h1>
           <ul className="list-unstyled">
             {socials.map((social) => (

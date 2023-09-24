@@ -1,59 +1,67 @@
-import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { Link } from 'react-router-dom'; 
+import React, { useState } from "react";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
 
 const initialValues = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().required('Password is required'),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
 });
 
-var dataBadge;
-
 const Login = () => {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState(""); // State to store login error message
+
+
   const onSubmit = async (values) => {
     try {
       // Send a POST request to your login endpoint
-      const response = await fetch('http://localhost:5500/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        import.meta.env.VITE_APP_ORIGIN + "/api/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
         console.log("RES: ", response);
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
-      dataBadge = data.message;
+
       if (!data.success) {
-    //     // Display a red badge if data.message is "Incorrect password or email"
-    //     const messageBadge = data.message === "Incorrect password or email" ? (
-    //       <span className="badge bg-danger">Error</span>
-    //     ) : null;
-
-        alert(data.message); // Display the message
-        console.log('Login unsuccessful', data);
-        console.log('Login successful', data);
-
-        // You can handle the login success here, such as storing authentication tokens
+        setLoginError(data.message); // Set login error message
+        console.log("Login unsuccessful", data);
+      } else {
+        console.log("Login successful", data);
+        navigate("/");
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error("Error during login:", error);
       // Handle login error, e.g., display an error message to the user
     }
   };
 
+  // Function to handle the back button click
+  const handleBackClick = () => {
+    navigate(-1); // Use navigate(-1) to navigate back to the previous page
+  };
+
   return (
     <div className="container">
+      <button  className="btn btn-sm btn-outline-dark m-2" onClick={handleBackClick}>
+      <i className="fa-solid fa-reply"></i> Back
+      </button>
       <h1 className="my-4">Login</h1>
       <Formik
         initialValues={initialValues}
@@ -69,7 +77,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              className="form-control"
+              className={`form-control ${loginError ? "is-invalid" : ""}`} // Apply is-invalid class when there's a login error
             />
             <ErrorMessage
               name="email"
@@ -86,7 +94,7 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              className="form-control"
+              className={`form-control ${loginError ? "is-invalid" : ""}`} // Apply is-invalid class when there's a login error
             />
             <ErrorMessage
               name="password"
@@ -116,10 +124,12 @@ const Login = () => {
             </Link>
           </div>
 
-          {/* Render the badge conditionally */}
-          {dataBadge === "Incorrect password or email" && (
+          {/* Render the error message conditionally */}
+          {loginError && (
             <div className="mb-3">
-              <span className="badge bg-danger">Error</span>
+              <div className="alert alert-danger" role="alert">
+                {loginError}
+              </div>
             </div>
           )}
         </Form>

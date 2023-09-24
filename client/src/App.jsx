@@ -10,7 +10,6 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import data from "../../cake.json"
 
 const cake = {
   id : 1,
