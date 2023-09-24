@@ -32,7 +32,7 @@
 #### Things to do
 
 ```
-    * Set development and prodcution url
-    * Implement Authentication
-    * Implement checkout
+    * Set development and prodcution url [x]
+    * Implement Authentication []
+    * Implement checkout [x]
 ```
