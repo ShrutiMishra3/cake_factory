@@ -1,8 +1,60 @@
 # cake_factory
 
-## [Live Link](http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com/)
+- [Live Link](http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com/)
 
-### SRS Document [Click Here](https://docs.google.com/document/d/1xxq_HDyZgQQXE9Ql2p_ONqY0hUvuF4eadkP6IVx8N5k/edit?usp=sharing)
+-  [SRS Document](https://docs.google.com/document/d/1xxq_HDyZgQQXE9Ql2p_ONqY0hUvuF4eadkP6IVx8N5k/edit?usp=sharing)
+
+## Steps to Execute
+
+```bash
+git clone https://github.com/prasantmahato/cake_factory.git
+cd cake_factory
+```
+
+- ### Create necessary .env variables and config file
+```bash
+touch client/.env
+# Content of .env file
+PORT=3000
+VITE_APP_ORIGIN = "http://localhost:5500"   # Backend server API endpoint
+```
+
+```bash
+touch backend/.env
+# Content of .env file
+PORT=5500
+NODE_ENV=development    # or Production
+SECRET_KEY="BIG-*SS-SECRET-KEY"
+TOKEN_KEY="BIG-*SS-SECRET-KEY"
+ORIGIN="http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com/"
+```
+
+```bash
+touch config/config.js
+#Content of config.js
+PORT = 5500
+MONGO_URI = 'YOUR_MONGO_DB_CONNECTION_URI'
+```
+
+- ### Install packages, and start client & server
+
+```bash
+cd client
+npm install
+npm run dev # Running in development mode
+# or
+npm run build   # Build for production
+```
+
+```bash
+cd ../backend
+npm install
+node server.js  # local
+# or 
+pm2 start server.js # Run on ec2 instance
+```
+
+
 
 ## Screenshots
 
