@@ -3,58 +3,92 @@ import { Link } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
 const Card = (cake) => {
-  const { cartItems, addToCart } = useContext(ShopContext);
-  const inStock = cake.stock > 0 ? 1 : 0;
-  const cakeId = cake.id;
-  const cartAmount = cartItems[cake.id];
+  const { cartItems, addToCart, removeFromCart, updateCartItemCount } = useContext(ShopContext);
+
+  const { id, stock, name, image, description, price } = cake;
+
+  const inStock = stock > 0;
+  const cartAmount = cartItems[id];
+
 
   // State to track whether the button has been clicked
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  // Function to handle the "Add to Cart" button click
   const handleAddToCartClick = () => {
-    // Update the buttonClicked state to true
     setButtonClicked(true);
+    addToCart(id);
+  };
 
-    // Add the item to the cart
-    addToCart(cake.id);
+  const handleRemoveFromCart = () => {
+    removeFromCart(id);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(id);
+  };
+
+  const handleItemCountChange = (e) => {
+    const newCount = Number(e.target.value);
+    updateCartItemCount(newCount, id);
   };
 
   return (
     <>
-      {inStock === 1 && (
+      {inStock && (
         <div className="card card1 mb-2">
-          <Link to={`/cake/${parseInt(cakeId)}`} style={{ textDecoration: "none", color: "inherit" }}>
-            <img src={cake.image} alt={cake.name} className="card--image" />
+          <Link to={`/cake/${id}`} style={{ textDecoration: "none", color: "inherit" }}>
+            <img src={image} alt={name} className="card--image" />
             <div className="card-body">
               <div className="card-content">
-                <h5 className="card-title">{cake.name}</h5>
-                <h5 className={`card-title bold ${buttonClicked ? "added-to-cart" : ""}`}>₹ {cake.price}</h5>
+                <h5 className="card-title">{name}</h5>
+                <h5 className={`card-title bold ${buttonClicked ? "added-to-cart" : ""}`}>₹ {price}</h5>
               </div>
               <p className="card-text card--title description">
-                <span className="truncate-2-lines">{cake.description}</span>
+                <span className="truncate-2-lines">{description}</span>
               </p>
               <p className="card-text">
                 <small className="text-body-secondary">
-                  In-stock: {cake.stock}
+                  In-stock: {stock}
                 </small>
               </p>
             </div>
           </Link>
           <div className="container p-2">
-            <a href="#" className="btn btn-primary m-2">
-              Buy Now
-            </a>{" "}
-            <button
-              className={`btn btn-warning m-2 btn-cart ${buttonClicked ? "button-clicked" : ""}`}
-              onClick={handleAddToCartClick}
-            >
-              {buttonClicked ? "Added to Cart" : "Add to Cart"}{" "}
-              <i className="fas fa-shopping-cart" />
-              {cartAmount > 0 && (
-                <sup className="--bs-danger-text-emphasis">{cartAmount}</sup>
-              )}
+              {!cartItems[id] ? (
+                <button
+                className="btn btn-warning p-2"
+                onClick={handleAddToCartClick}
+              >Add to cart <i className="fas fa-shopping-cart" />
             </button>
+              ) : (
+                <div className="row g-1 align-items-center">
+                  <div className="col-auto">
+                    <button
+                      className="btn btn-danger"
+                      onClick={handleRemoveFromCart}
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div className="col-auto">
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={cartItems[id]}
+                      onChange={handleItemCountChange}
+                      min={0}
+                    />
+                  </div>
+                  <div className="col-auto">
+                    <button
+                      className="btn btn-success"
+                      onClick={handleAddToCart}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              )}{" "}
           </div>
         </div>
       )}

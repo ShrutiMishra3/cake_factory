@@ -3,15 +3,12 @@ import { ShopContext } from "../context/ShopContext";
 import { useNavigate } from "react-router-dom";
 
 function Checkout() {
-  const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  const { getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   const navigate = useNavigate();
 
-  console.log("ToTAL: ",totalAmount);
-
-  // State to store user input for address and payment
-  const [address, setAddress] = useState("");
-  const [paymentInfo, setPaymentInfo] = useState("");
+  // State to store user input for payment method
+  const [paymentMethod, setPaymentMethod] = useState("creditCard");
 
   // Function to handle the back button click
   const handleBackClick = () => {
@@ -21,19 +18,14 @@ function Checkout() {
   // Function to handle the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    checkout();
-    alert("Your Order placed successfully");
-    navigate("/");
-    // Validate and handle the address and payment data
-    // if (address && paymentInfo) {
-    //   // You can implement your payment logic here
-
-    //   alert("ORDER PLACED.");
-    //   // After successful payment, you can navigate to a thank you page or home page
-    //   navigate("/"); // Replace "/thankyou" with the actual thank you page route
-    // } else {
-    //   alert("Please enter both address and payment information.");
-    // }
+    if(e.target.paymentMethod){
+      alert("Order failed.!");
+      navigate("/cart");
+    }else{
+      checkout();
+      alert("Your order has been placed successfully!");
+      navigate("/");
+    }
   };
 
   return (
@@ -49,47 +41,56 @@ function Checkout() {
           <h1>Checkout</h1>
         </div>
       </div>
-      <div className="row mt-4">
-        <div className="col-md-6">
-          <p className="mb-0 display-6">Subtotal: ₹{totalAmount}</p>
-        </div>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-6">
-          <h3>Select Payment Method:</h3>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="paymentMethod"
-              id="creditCard"
-              value="creditCard"
-            />
-            <label className="form-check-label" htmlFor="creditCard">
-              Credit Card
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="paymentMethod"
-              id="paypal"
-              value="paypal"
-            />
-            <label className="form-check-label" htmlFor="paypal">
-              PayPal
-            </label>
+
+      <form>
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <p className="mb-0 display-6">Subtotal: ₹{totalAmount}</p>
           </div>
         </div>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-6">
-          <button className="btn btn-outline-success" onClick={handleSubmit}>
-            Pay Now
-          </button>
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <h3>Select Payment Method:</h3>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="paymentMethod"
+                id="creditCard"
+                value="creditCard"
+                checked={paymentMethod === "creditCard"}
+                onChange={() => setPaymentMethod("creditCard")}
+                required
+              />
+              <label className="form-check-label" htmlFor="creditCard">
+                Credit Card
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="paymentMethod"
+                id="paypal"
+                value="paypal"
+                checked={paymentMethod === "paypal"}
+                onChange={() => setPaymentMethod("paypal")}
+                required
+              />
+              <label className="form-check-label" htmlFor="paypal">
+                PayPal
+              </label>
+            </div>
+          </div>
         </div>
-      </div>
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <button className="btn btn-outline-success" onClick={handleSubmit}>
+              Pay Now
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
