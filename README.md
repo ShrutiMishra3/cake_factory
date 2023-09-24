@@ -26,7 +26,7 @@ PORT=5500
 NODE_ENV=development    # or Production
 SECRET_KEY="BIG-*SS-SECRET-KEY"
 TOKEN_KEY="BIG-*SS-SECRET-KEY"
-ORIGIN="http://ec2-13-235-71-128.ap-south-1.compute.amazonaws.com/"
+ORIGIN="http:localhost:5500/"
 ```
 
 ```bash
